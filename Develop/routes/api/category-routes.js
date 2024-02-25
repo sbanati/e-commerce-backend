@@ -40,18 +40,29 @@ router.get('/:id', async (req, res) => {
 // create a new category
 router.post('/', async (req, res) => {
   try{
-    const newCategory = req.body;
-    const categoryData = await Category.create(newCategory);
-    res.status(200).json({categoryData});
+    const newCategory = await Category.create(req.body);
+    res.status(200).json({newCategory});
   }catch (err){
-    res.status(500).json(err, 'Check column name = category_name, Make sure you are creating 1 new category at a time')
+    res.status(500).json(err, 'Check column name = category_name, Limit to create 1 category at a time')
   }
   
 
 });
 
-router.put('/:id', (req, res) => {
-  // update a category by its `id` value
+// update a category by its `id` value
+router.put('/:id', async (req, res) => {
+  try {
+    // Update the category with the corresponding ID using the data from req.body 
+    const updated = await Category.update(req.body, { where: { id: req.params.id} });
+
+    if (!updated[0]){
+      res.status(404).json({message: 'id not found'});
+      return;  
+    }
+    res.status(200).json(updated);
+  } catch (err){
+    res.status(500).json({message: 'Failed to update category'});
+  }
 });
 
 router.delete('/:id', (req, res) => {

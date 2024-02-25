@@ -25,7 +25,7 @@ router.get('/:id', async (req, res) => {
       include: [{model: Product }]
     });
     // if the category is not found then sesnd a 404 status with an error message
-    if (!Category){
+    if (!categoryData){
       res.status(404).json({message: 'error, invalid category by id search'});
       return;
     }

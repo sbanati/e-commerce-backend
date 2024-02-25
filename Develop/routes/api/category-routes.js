@@ -28,7 +28,7 @@ router.get('/:id', async (req, res) => {
     // if the category is not found then send a 404 status with an error message
     if (!categoryData){
       res.status(404).json({message: 'error, invalid category by id search'});
-      return;
+      return; // exit function early
     }
     res.status(200).json(categoryData);
   } catch (err) {
@@ -55,7 +55,7 @@ router.put('/:id', async (req, res) => {
 
     if (!updated[0]){
       res.status(404).json({message: 'id not found'});
-      return;  
+      return; // exit function early
     }
     res.status(200).json(updated);
   } catch (err){
@@ -71,7 +71,7 @@ router.delete('/:id', async (req, res) => {
 
     if (!deleted){
       res.status(404).json({message: 'id not found'});
-      return;
+      return; // exit function early
     }
     res.status(200).json(deleted);
   } catch(err) {

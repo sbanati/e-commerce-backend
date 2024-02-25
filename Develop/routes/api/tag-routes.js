@@ -3,23 +3,29 @@ const { Tag, Product, ProductTag } = require('../../models');
 
 // The `/api/tags` endpoint
 
-// find all tags
-// be sure to include its associated Product data
+// Find all tags
+
+// Handle GET requests to the '/' endpoint
 router.get('/', async (req, res) => {
   try {
+    // Fetch all tags, including associated product data
     const tagData = await Tag.findAll({
       include: [{model: Product }]
-    });
+    }); 
+    // Respond with a 200 status code and the fetched tag data
     res.status(200).json(tagData);
-  
   } catch (err) {
+    // Log the error for debugging purposes
     console.error('Error fetching tags', err);
+    // Respond with a 404 status code and an error message if fetching fails
     res.status(404).json({message: 'Tags could not be retrieved successfully'});
   } 
 });
 
-// find a single tag by its `id`
-// be sure to include its associated Product data
+
+// Find a single tag by its `id` 
+
+// Handle GET requests to the '/:id' endpoint 
 router.get('/:id', async (req, res) => {
   try {
     // find the tag by its specific id and its associated products
@@ -29,7 +35,7 @@ router.get('/:id', async (req, res) => {
     // if the tag is not found then send a 404 status with an error message
     if (!tagData){
       res.status(404).json({message: 'error, invalid tag by id search'});
-      return;
+      return; // exit function early 
     }
     res.status(200).json(tagData);
   } catch (err) {
@@ -38,7 +44,10 @@ router.get('/:id', async (req, res) => {
   }
   
 });
+
+
 // create a new tag
+
 // Handle POST requests to the '/' endpoint
 router.post('/', async (req, res) => {
   try{
@@ -53,12 +62,32 @@ router.post('/', async (req, res) => {
   }
 });
 
-router.put('/:id', (req, res) => {
-  // update a tag's name by its `id` value
+// update a tag's name by its `id` value
+
+// Handle PUT requests to the '/:id' endpoint
+router.put('/:id', async (req, res) => {
+  try {
+     // Update a Tag's name by its `id` value using the data from req.body
+     const updated = await Tag.update(req.body, {
+       where: { id: req.params.id },
+     });
+     // Check if no rows were affected during the update (Tag not found)
+     if (!updated[0]) {
+       // Respond with a 404 status code and an error message
+       res.status(404).json({ message: 'Cannot find the Tag with this id' });
+       return; // exit function early 
+      } 
+      // If the update is successful, respond with a 200 status code and the updated data
+      res.status(200).json(updated);
+     
+   } catch (err) {
+     // If an error occurs during the update, respond with a 500 status code and an error message
+     res.status(500).json({ message: 'Failed to update Tag', error: err });
+   }
 });
 
-router.delete('/:id', (req, res) => {
-  // delete on tag by its `id` value
-});
+
+
+
 
 module.exports = router;

@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
   
   } catch (err) {
     console.error('Error fetching tags', err);
-    res.status(500).json({message: 'Tags could not be retrieved successfully'});
+    res.status(404).json({message: 'Tags could not be retrieved successfully'});
   } 
 });
 
@@ -38,9 +38,19 @@ router.get('/:id', async (req, res) => {
   }
   
 });
+// create a new tag
+// Handle POST requests to the '/' endpoint
+router.post('/', async (req, res) => {
+  try{
+    // Create a new tag using the Tag model and request body
+    const tagData = await Tag.create(req.body);
+    // If Tag Creation is successful, respond with a 200 status code and created tagData
+    res.status(200).json(tagData);
+  } catch (err) {
+    // If an error occurs during tag creation, respond with a 400 status code and an error message
+    res.status(400).json({message: 'Failed to create new tag'});
 
-router.post('/', (req, res) => {
-  // create a new tag
+  }
 });
 
 router.put('/:id', (req, res) => {

@@ -53,14 +53,14 @@ router.post('/', async (req, res) => {
   try{
     // Create a new tag using the Tag model and request body
     const tagData = await Tag.create(req.body);
-    // If Tag Creation is successful, respond with a 200 status code and created tagData
-    res.status(200).json(tagData);
+    // If Tag Creation is successful, respond with a 200 status code, success message, and created tagData
+    res.status(200).json({ message: 'Tag created successfully', tagData });
   } catch (err) {
     // If an error occurs during tag creation, respond with a 400 status code and an error message
-    res.status(400).json({message: 'Failed to create new tag'});
-
+    res.status(400).json({ message: 'Failed to create new tag', error: err });
   }
 });
+
 
 // update a tag's name by its `id` value
 
@@ -93,19 +93,24 @@ router.put('/:id', async (req, res) => {
 // Handle DELETE requests to the '/:id' endpoint
 router.delete('/:id', async (req, res) => {
   try{
+    // Delete a Tag with the specified id
     const deleted = await Tag.destroy({ where: {id: req.params.id}});
     
+    // Check if no rows were affected during the deletion (Tag not found)
     if (!deleted) {
-      res.status(404).json({ message: 'Cant Find a Tag with this id'});
+      // Respond with a 404 status code and an error message
+      res.status(404).json({ message: 'Cannot find a Tag with this id'});
       return;
     }
+
+    // If the deletion is successful, respond with a 200 status code and the number of rows deleted
     res.status(200).json(deleted);
   
   } catch (err) {
-    res.status(500).json({message: 'Failed to delete Tag'})
+    // If an error occurs during the deletion, respond with a 500 status code and an error message
+    res.status(500).json({message: 'Failed to delete Tag', error: err})
   }
-
-  
 });
+
 
 module.exports = router;

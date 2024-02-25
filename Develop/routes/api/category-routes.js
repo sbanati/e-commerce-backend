@@ -11,6 +11,7 @@ router.get('/', async (req, res) => {
     });
     res.status(200).json(categoryData);
   }catch(err){
+    // Error handling in the catch block, sending a 500 status with message
     res.status(500).json({message: 'Categories could not be retrieved successfully!'});
   }
 });
@@ -24,7 +25,7 @@ router.get('/:id', async (req, res) => {
     const categoryData = await Category.findByPk(req.params.id,{
       include: [{model: Product }]
     });
-    // if the category is not found then sesnd a 404 status with an error message
+    // if the category is not found then send a 404 status with an error message
     if (!categoryData){
       res.status(404).json({message: 'error, invalid category by id search'});
       return;

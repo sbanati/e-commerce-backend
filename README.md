@@ -13,9 +13,9 @@
 <h1 align="center">E-commerce|Backend Wizard</h1>
 
   <p align="center">
-    The best employee tracker you will ever need to manage your company!. 
+    A functioning backend for an e-commerce website!. 
     <br />
-    <a href="https://github.com/sbanati/README-Wizard"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/sbanati/e-commerce-backend"><strong>Explore the docs »</strong></a>
     <br />
     <br />
 
@@ -55,7 +55,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
-This project is a node.js challenge where I was tasked with building a command-line application from scratch to manage a company's employee database, using Node.js, Inquirer, and MySQL.  
+This application enables users to interact with e-commerce information, providing functionalities to view, create, edit, and delete products, categories, and tags associated with them .  
 <br><br>
  
 
@@ -92,18 +92,17 @@ This project is a node.js challenge where I was tasked with building a command-l
 <!-- GETTING STARTED -->
 ## Getting Started
 
- <h3>For end users</h3> 
-https://github.com/sbanati/TeamFlow  <br>
+
 
 
 
 
 ### Installation
-For anyone wanting to contribute <br>
+Clone the repo below and open the project in your source code editor. Open the terminal, execute "npm install" to ensure all required packages are installed. Connect to MySQL in the same terminal and execute "source db/schema.sql" to create the database. Afterward, run npm run seed in the terminal to populate the data in the seeds file. Once this is done, initiate the application by running "npm start" in the terminal. <br>
 
 1. Clone the repo
    ```sh
-   https://github.com/sbanati/TeamFlow.git
+   https://github.com/sbanati/e-commerce-backend.git
    ```
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
@@ -113,7 +112,7 @@ For anyone wanting to contribute <br>
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-<h3>Demo Video of TeamFlow Wizard.</h3>
+<h3>Demo Video of e-commerce-backend.</h3>
 
 https://youtu.be/Ft5N33LkwrQ
 
@@ -133,11 +132,8 @@ https://youtu.be/Ft5N33LkwrQ
 
 <h3>Possible features</h3>
 
-* The delete functions are stand alone,  implimenting a main function for deletion of department/role/employee and that function would call one of the individual functions when the user answers a prompt handled by switch case.
-* Refactor the code for asynch JS
-* Modularizing the server.js file for separation of concerns of functions 
-
-
+* Possibly create a front end to connect this back end to 
+ 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -165,7 +161,7 @@ If you have a suggestion that would make this better, please fork the repo and c
 <!-- ACKNOWLEDGEMENT -->
 ## Acknowledgement
 * TA Sachin
-* Pair programmed with Salvatore , The naming is funny :) 
+* Pair programmed with Salvatore 
   
 
 

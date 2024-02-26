@@ -8,27 +8,27 @@ ProductTag.init(
   {
     // define columns
     id: {
-      type:DataTypes.INTEGER,
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true,
+      type:DataTypes.INTEGER, // sets the data type to INTEGER
+      allowNull: false, // doesnt allow NULL values
+      primaryKey: true, // Sets the primary key
+      autoIncrement: true, // Auto increments the value for new records
     },
 
     product_id: {
-      type:DataTypes.INTEGER,
+      type:DataTypes.INTEGER, // sets the data type to INTEGER
       references: {
-        model: 'product',
-        key: 'id',
-        unique: false
+        model: 'product', // references product table 
+        key: 'id', // references id column in product table 
+        unique: false 
 
       }
     },
 
     tag_id : {
-      type:DataTypes.INTEGER,
+      type:DataTypes.INTEGER, // sets the data type to INTEGER
       references: {
-        model: 'tag',
-        key: 'id',
+        model: 'tag', // reference the tag table 
+        key: 'id', // reference the id column in tag table 
         unique: false,
       }
     },

@@ -4,7 +4,6 @@ const { Tag, Product, ProductTag } = require('../../models');
 // The `/api/tags` endpoint
 
 // Find all tags
-
 // Handle GET requests to the '/' endpoint
 router.get('/', async (req, res) => {
   try {
@@ -15,8 +14,6 @@ router.get('/', async (req, res) => {
     // Respond with a 200 status code and the fetched tag data
     res.status(200).json(tagData);
   } catch (err) {
-    // Log the error for debugging purposes
-    console.error('Error fetching tags', err);
     // Respond with a 404 status code and an error message if fetching fails
     res.status(404).json({message: 'Tags could not be retrieved successfully'});
   } 
@@ -24,7 +21,6 @@ router.get('/', async (req, res) => {
 
 
 // Find a single tag by its `id` 
-
 // Handle GET requests to the '/:id' endpoint 
 router.get('/:id', async (req, res) => {
   try {
@@ -47,7 +43,6 @@ router.get('/:id', async (req, res) => {
 
 
 // create a new tag
-
 // Handle POST requests to the '/' endpoint
 router.post('/', async (req, res) => {
   try{
@@ -63,7 +58,6 @@ router.post('/', async (req, res) => {
 
 
 // update a tag's name by its `id` value
-
 // Handle PUT requests to the '/:id' endpoint
 router.put('/:id', async (req, res) => {
   try {
@@ -89,7 +83,6 @@ router.put('/:id', async (req, res) => {
 
 
 // Delete on tag by its `id` value
-
 // Handle DELETE requests to the '/:id' endpoint
 router.delete('/:id', async (req, res) => {
   try{

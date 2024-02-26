@@ -3,35 +3,38 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 
 // The `/api/products` endpoint
 
-// find all products
-// be sure to include its associated Category and Tag data
+// Find all products
+// Handle GET requests to the '/' endpoint
 router.get('/', async (req, res) => {
-  // Find all products
   try{
+    // Find all products, and include associated categories and tags 
     const products = await Product.findAll({
       include: [{ model: Category}, { model: Tag}],
     });
     res.status(200).json(products);
   } catch (err) {
-    res.status(404).json({message: 'Could not find Products'});
+    // Handle error by returning 404 : server cant find the reques & returns a message.
+    res.status(404).json({message: 'Product resource not found'});
   }
 });
 
-// find a single product by its `id`
-// be sure to include its associated Category and Tag data
+// Find a single product by its `id`
+// Handle GET requests to the '/:id' endpoint
 router.get('/:id', async (req, res) => {
   try {
+    //find a product by its primary key (id) include associated Category and Tag data
     const product = await Product.findByPk(req.params.id, {
       include: [{model: Category}, {model: Tag}],
     });
+    // if the product is not found then Handle error by returning 404 : server cant find the request & returns a message.
     if (!product){
-      res.status(404).json({message: 'Product not found with that id'});
-      return;
+      res.status(404).json({message: 'id resource not found for product'});
+      return; // exit function early
     }
     res.status(200).json(product);
   } catch (err) {
-    console.error('Error finding product by id:', err);
-    res.status(500).json({message: 'Internal Server Error'});
+    // Error handling in the catch block, sending a 500 status catch all with message
+    res.status(500).json({message: 'Failed to find product by id'});
   }
 });
 
@@ -113,17 +116,20 @@ router.put('/:id', (req, res) => {
 });
 
 // delete one product by its `id` value
+// Handle GET requests to the '/:id' endpoint
 router.delete('/:id', async (req, res) => {
   try{
     // Delete product by its `id` 
     const deleted = await Product.destroy({ where: { id: req.params.id}});
+    // if deleted is not found then Handle error by returning 404 : server cant find the request & returns a message.
     if (!deleted){
-      res.status(404).json({message: 'Unrecognized id for delete'})
-      return;
+      res.status(404).json({message: 'id resource not found'})
+      return; // exit function early
     }
     res.status(200).json(deleted);
   
   } catch (err) {
+    // Error handling in the catch block, sending a 500 status catch all with message
     res.status(500).json({message: 'Product delete failed', error: err});
   }  
 });

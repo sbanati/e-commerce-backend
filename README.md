@@ -114,7 +114,7 @@ Clone the repo below and open the project in your source code editor. Open the t
 
 <h3>Demo Video of e-commerce-backend.</h3>
 
-https://youtu.be/Ft5N33LkwrQ
+https://www.youtube.com/watch?v=3Qst3kEQlFs
 
 
 

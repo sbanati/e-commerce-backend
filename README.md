@@ -98,7 +98,7 @@ This application enables users to interact with e-commerce information, providin
 
 
 ### Installation
-Clone the repo below and open the project in your source code editor. Open the terminal, execute "npm install" to ensure all required packages are installed. Connect to MySQL in the same terminal and execute "source db/schema.sql" to create the database. Afterward, run "npm run seed" in the terminal to populate the data in the seeds file. Once this is done, initiate the application by running "npm start" in the terminal. <br>
+Clone the repo below and open the project in your source code editor. Open the terminal, execute "npm install" to ensure all required packages are installed. Connect to MySQL in the same terminal and execute "source db/schema.sql" to create the database. Afterward, run "npm run seed" in the terminal to populate the tables from the data in the seeds.js file. Once this is done, initiate the application by running "npm start" in the terminal. <br>
 
 1. Clone the repo
    ```sh

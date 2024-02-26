@@ -4,7 +4,7 @@ const { Product, Category, Tag, ProductTag } = require('../../models');
 // The `/api/products` endpoint
 
 // find all products
-  // be sure to include its associated Category and Tag data
+// be sure to include its associated Category and Tag data
 router.get('/', async (req, res) => {
   // Find all products
   try{
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
 });
 
 // find a single product by its `id`
-  // be sure to include its associated Category and Tag data
+// be sure to include its associated Category and Tag data
 router.get('/:id', async (req, res) => {
   try {
     const product = await Product.findByPk(req.params.id, {
@@ -112,8 +112,20 @@ router.put('/:id', (req, res) => {
     });
 });
 
-router.delete('/:id', (req, res) => {
-  // delete one product by its `id` value
+// delete one product by its `id` value
+router.delete('/:id', async (req, res) => {
+  try{
+    // Delete product by its `id` 
+    const deleted = await Product.destroy({ where: { id: req.params.id}});
+    if (!deleted){
+      res.status(404).json({message: 'Unrecognized id for delete'})
+      return;
+    }
+    res.status(200).json(deleted);
+  
+  } catch (err) {
+    res.status(500).json({message: 'Product delete failed', error: err});
+  }  
 });
 
 module.exports = router;
